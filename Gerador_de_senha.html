@@ -9,17 +9,44 @@
   <h1>Gerador de Senha</h1>
   <p>Utilize o nosso gerador online para criar uma senha forte e segura.</p>
   <input type="text" name="senha" id="senha" />
+  <br />
   <input type="range" name="senha-tam" id="senha-tam" value="16" min="4" max="64"/>
-  <button>Copiar Senha</button>
+  <button id="copiar">Copiar Senha</button>
 
   <script>
-    function geracaodesenha(){
+    let range = 16
+    const inputEl = document.querySelector("#senha")
+
+    function geradordesenha(){
       const caracteres = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ123456789?!@&*()[]"
 
       let senha = ""
 
-      
+      for (let i = 0; i < range; i++){
+        const numAle = Math.floor(Math.random() * caracteres.length)
+        senha += caracteres.substring(numAle, numAle + 1)
+      }
+      inputEl.value = senha
+    }  
+
+    function copiar(){
+      navigator.clipboard.writeText(inputEl.value)
     }
+
+    const rangeEl = document.querySelector("#senha-tam")
+    rangeEl.addEventListener("input", function(){
+      range = rangeEl.value
+      /* Preciso chamar a função novamente, pois o valor informado 
+      nesse ponto será utilizado lá em cima (no "for") */
+      geradordesenha()
+    })    
+
+    const copiarEl = document.querySelector("#copiar")
+    copiarEl.addEventListener("click", copiar)
+        
+
+    geradordesenha()
+
   </script>
 </body>
 </html>
