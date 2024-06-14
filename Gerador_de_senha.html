@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
   <title>Gerador de Senha</title>
 </head>
 <body>
-  <h1>Gerador de Senha</h1>
-  <p>Utilize o nosso gerador online para criar uma senha forte e segura.</p>
-  <input type="text" name="senha" id="senha" />
-  <br />
-  <input type="range" name="senha-tam" id="senha-tam" value="16" min="4" max="64"/>
-  <button id="copiar">Copiar Senha</button>
+  <main>
+    <section class="hero">
+      <h1 class="titulo">Gerador de Senha</h1>
+      <p class="subtitulo">Utilize o nosso gerador online para criar uma senha forte e segura.</p>
+    </section>
+    <input type="text" name="senha" id="senha" />
+    <input type="range" name="senha-tam" id="senha-tam" value="16" min="4" max="64"/>
+    <button id="copiar">Copiar Senha</button>
+  </main>
 
   <script>
     let range = 16
