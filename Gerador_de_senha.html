@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
   <title>Gerador de Senha</title>
@@ -16,9 +16,29 @@
       <h1 class="titulo">Gerador de Senha</h1>
       <p class="subtitulo">Utilize o nosso gerador online para criar uma senha forte e segura.</p>
     </section>
-    <input type="text" name="senha" id="senha" />
+
+    <section class="caixa">
+      <div class="senha">
+        <div class="texto">
+          <input type="text" name="senha" id="senha" />
+        </div>
+        <div class="actions">
+          <button id="copiar2">
+            <img src="copy.svg" width="42" title="copiar">
+          </button>
+          <button id="reiniciar">
+            <img src="renew.svg" width="42" title="atualizar">
+          </button>
+        </div>
+      </div>
+      <div>
+        <div class="indicador-seguranca">
+          <div id="barra-indicador-seguranca" class="barra safe" style="width: 90%;"></div>
+        </div>
+      </div>
+    </section>
     <input type="range" name="senha-tam" id="senha-tam" value="16" min="4" max="64"/>
-    <button id="copiar">Copiar Senha</button>
+    <button id="copiar1">Copiar Senha</button>
   </main>
 
   <script>
@@ -49,8 +69,8 @@
       geradordesenha()
     })    
 
-    const copiarEl = document.querySelector("#copiar")
-    copiarEl.addEventListener("click", copiar)
+    document.querySelector("#copiar1").addEventListener("click", copiar)
+    document.querySelector("#copiar2").addEventListener("click", copiar)
         
 
     geradordesenha()
