@@ -19,10 +19,13 @@
 
     <section class="caixa">
       <div class="senha">
+        <!-- Texto da senha gerada -->
         <div class="texto">
           <input type="text" name="senha" id="senha" />
         </div>
+        <!-- Botão de copiar e atualizar -->
         <div class="actions">
+          <!-- Imagem dos botões exportadas em ".svg" -->
           <button id="copiar2">
             <img src="copy.svg" width="42" title="copiar">
           </button>
@@ -31,14 +34,44 @@
           </button>
         </div>
       </div>
+      <!-- Barra de indicação de segurança -->
       <div>
         <div class="indicador-seguranca">
           <div id="barra-indicador-seguranca" class="barra safe" style="width: 90%;"></div>
         </div>
       </div>
     </section>
-    <input type="range" name="senha-tam" id="senha-tam" value="16" min="4" max="64"/>
-    <button id="copiar1">Copiar Senha</button>
+    <section class="box customizar">
+      <h3 class="titulo">Personalizar</h3>
+      <div class="actions">
+          <div class="comprimento-senha">
+          <p>Tamanho: <span id="comprimento-senha-texto">16</span></p>
+          <input type="range" name="senha-tam" id="senha-tam" class="deslizar" value="16" min="4" max="64"/>
+        </div>
+        <!-- checkbox das options  -->
+        <div class="config">
+          <label class="checkbox">
+            <span class="text">Maiúsculas</span>
+            <input type="checkbox" id="maiusculas-check" checked />
+            <span class="checkmark"></span>
+          </label>
+          <label class="checkbox">
+            <span class="text">Números</span>
+            <input type="checkbox" id="numeros-check" checked />
+            <spam class="checkmark"></spam>
+          </label>
+          <label class="checkbox">
+            <span class="text">Símbolos</span>
+            <input type="checkbox" id="simbolos-check" checked />
+            <spam class="checkmark"></spam>
+          </label>
+
+        </div>
+      </div>
+    </section>
+    <div class="submit">
+      <button id="copiar1">Copiar Senha</button>
+    </div>
   </main>
 
   <script>
