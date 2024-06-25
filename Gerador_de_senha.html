@@ -37,7 +37,7 @@
       <!-- Barra de indicação de segurança -->
       <div>
         <div class="indicador-seguranca">
-          <div id="barra-indicador-seguranca" class="barra safe" style="width: 90%;"></div>
+          <div id="barra-indicador-seguranca" class="barra seguro"></div>
         </div>
       </div>
     </section>
@@ -77,9 +77,28 @@
   <script>
     let range = 16
     const inputEl = document.querySelector("#senha")
+    const maiuscCheckEl = document.querySelector("#maiusculas-check")
+    const numCheckEl = document.querySelector("#numeros-check")
+    const simbCheckEl = document.querySelector("#simbolos-check")
+    const tamanhoEl = document.querySelector("#comprimento-senha-texto")
+    const barraIndicadorSeguranca = document.querySelector("#barra-indicador-seguranca")
 
     function geradordesenha(){
-      const caracteres = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ123456789?!@&*()[]"
+      let caracteres = "abcdefghjkmnpqrstuvwxyz"
+
+      const maiusc = "ABCDEFGHJKMNPQRSTUVWXYZ"
+      const num = "123456789"
+      const simb = "?!@&*()[]"
+
+      if (maiuscCheckEl.checked) {
+        caracteres += maiusc
+      }
+      if (numCheckEl.checked){
+        caracteres += num
+      }
+      if (simbCheckEl.checked){
+        caracteres += simb
+      }
 
       let senha = ""
 
@@ -88,7 +107,54 @@
         senha += caracteres.substring(numAle, numAle + 1)
       }
       inputEl.value = senha
+      calcQualidade()
+      calcFonte()
     }  
+
+    function calcQualidade(){
+      //T*35% + M*15% + N*35 + S*15% = 100%
+      const porcento = Math.round((rangeEl.value / 64)*35 + (maiuscCheckEl.checked ? 15 : 0) + (numCheckEl.checked ? 35 : 0) + (simbCheckEl.checked ? 15 : 0))
+      barraIndicadorSeguranca.style.width = `${porcento}%`
+      if(porcento > 69){
+        barraIndicadorSeguranca.classList.remove("fraco")
+        barraIndicadorSeguranca.classList.remove("cuidado")
+        barraIndicadorSeguranca.classList.add("seguro")
+      } else if (porcento > 50){
+        barraIndicadorSeguranca.classList.remove("seguro")
+        barraIndicadorSeguranca.classList.remove("fraco")
+        barraIndicadorSeguranca.classList.add("cuidado")
+      } else {
+        barraIndicadorSeguranca.classList.remove("seguro")
+      barraIndicadorSeguranca.classList.remove("cuidado")
+      barraIndicadorSeguranca.classList.add("fraco")
+      }
+
+      if(barraIndicadorSeguranca >= 100){
+        barraIndicadorSeguranca.classList.add("completo")
+      } else {
+        barraIndicadorSeguranca.classList.remove("completo")
+      }
+    }
+
+    function calcFonte(){
+      if (rangeEl.value > 40){
+        inputEl.classList.remove("font-grd")
+        inputEl.classList.remove("font-med")
+        inputEl.classList.add("font-peq")
+      } else if (rangeEl.value > 28){
+        inputEl.classList.remove("font-grd")
+        inputEl.classList.remove("font-peq")
+        inputEl.classList.add("font-med")
+      } else if (rangeEl.value > 18){
+        inputEl.classList.remove("font-peq")
+        inputEl.classList.remove("font-med")
+        inputEl.classList.add("font-grd")
+      } else {
+        inputEl.classList.remove("font-peq")
+        inputEl.classList.remove("font-med")
+        inputEl.classList.remove("font-grd")
+      }
+    }
 
     function copiar(){
       navigator.clipboard.writeText(inputEl.value)
@@ -97,10 +163,14 @@
     const rangeEl = document.querySelector("#senha-tam")
     rangeEl.addEventListener("input", function(){
       range = rangeEl.value
+      tamanhoEl.innerHTML = range
       /* Preciso chamar a função novamente, pois o valor informado 
       nesse ponto será utilizado lá em cima (no "for") */
       geradordesenha()
     })    
+    maiuscCheckEl.addEventListener("click", geradordesenha)
+    numCheckEl.addEventListener("click", geradordesenha)
+    simbCheckEl.addEventListener("click", geradordesenha)
 
     document.querySelector("#copiar1").addEventListener("click", copiar)
     document.querySelector("#copiar2").addEventListener("click", copiar)
