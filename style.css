@@ -218,3 +218,23 @@ main {
   background-color: #9b51e0;
 }
 
+@media only screen and (max-width: 480px) {
+  .senha {
+    padding: 1rem;
+  }
+  .senha .texto input {
+    font-size: 1.5rem;
+  }
+  .senha .texto input.font-grd {
+    font-size: 1rem;
+  }
+  .senha .texto input.font-med {
+    font-size: 0.75rem;
+  }
+  .senha .texto input.font-peq {
+    font-size: 0.75rem;
+  }
+  .senha .actions img {
+    width: 24px;
+  }
+}
